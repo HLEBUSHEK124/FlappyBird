@@ -1,0 +1,43 @@
+body {
+	background: rgb(72,255,99);
+background: radial-gradient(circle, rgba(72,255,99,1) 0%, rgba(0,255,55,1) 27%, rgba(113,200,196,1) 30%, rgba(248,255,76,1) 73%, rgba(252,228,70,1) 100%);
+}
+#canvas {
+	margin: 0 auto;
+	width: 900;
+	display: flex;
+	justify-content: center;
+}
+.wrapper {
+	width: 900px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-around;
+	align-content: center;
+	font-size: 30px;
+	color: violet;
+
+}
+.description {
+	width: 900px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 40px;
+	color: violet;
+}
+button {
+	font-size: 30px;
+	background: rgba(0, 0, 0, 0.4);
+	padding: 5px;
+	border-radius: 10px;
+	border: none;
+	color: whitesmoke;
+}
+.control {
+	width: 900px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
