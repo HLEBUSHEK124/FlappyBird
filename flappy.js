@@ -10,14 +10,14 @@ bird.src = "bird.png"
 let back = new Image()
 back.src = "back.png"
 
-let road = new Image()
-road.src = "road.png"
+let pipeBottom = new Image()
+pipeBottom.src = "pipeBottom.png"
 
 let pipeUp = new Image()
 pipeUp.src = "pipeUp.png"
 
-let pipeBottom = new Image()
-pipeBottom.src = "pipeBottom.png"
+let road = new Image()
+road.src = "road.png"
 
 let fly = new Audio()
 fly.src = "fly.mp3"
@@ -33,9 +33,9 @@ let gravity = 0.2
 
 let gap = 110
 let pipe = []
-pipe[0]={
+pipe[0]= {
 	x : canvas.width,
-	y : 0
+	y: 0
 }
 
 let score = 0
@@ -43,53 +43,52 @@ let score_text = document.getElementById("score")
 let best_score_text = document.getElementById("best_score")
 let best_score = 0
 
+function draw() {
+	if(!pause) {
+		ctx.drawImage(back, 0, 0)
+	ctx.drawImage(bird, xPos, yPos)
 
-function draw(argument) {
- if(pause)
- 	ctx.drawImage(back, 0, 0)
- ctx.drawImage(bird, xPos, yPos)
-}
-if(yPos + bird.height >= canvas.height - road.height){
+	if(yPos + bird.height >= canvas.height-road.height){
 		reload()
 	}
-	
+
 	velY += gravity
 	yPos += velY
 
-	for(let i = 0; i< pipe.length; i++){
+	for(let i = 0; i < pipe.length; i++ ){
 		ctx.drawImage(pipeUp, pipe[i].x, pipe[i].y)
-		ctx.drawImage(pipeBottom, pipe[i].x,  pipe[i].y+pipeUp.height+gap)
+		ctx.drawImage(pipeBottom, pipe[i].x, pipe[i].y+pipeUp.height+gap)
 		pipe[i].x -=2
 		if( pipe[i].x == 80){
 			pipe.push({
 				x: canvas.width,
 				y: Math.floor(Math.random()*pipeUp.height)-pipeUp.height
 			})
-			}
-		
-	if (xPos+bird.width >= pipe[i].x && xPos<= pipe[i].x+pipeUp.width &&(yPos<=pipe[i].y+pipeUp.height || yPos+bird.height >= pipe[i].y+pipe[i].y+pipeUp.height + gap)){
-       location.reload()
-	}
+		}
+	
+	if (xPos+bird.width >= pipe[i].x && xPos<= pipe[i].x+pipeUp.width && 
+		(yPos<=pipe[i].y+pipeUp.height || yPos+bird.height >= pipe[i].y+pipeUp.height + gap)){
+		reload()
+	}	
 	if(pipe[i].x==0){
 		score++
 		score_audio.play()
-	  }
+		}
 	}
-		ctx.drawImage(road, 0, canvas.height-road.height)
-		score_text.innerHTML = `SCORE: ${score}`
-		best_score_text.innerHTML = `BEST SCORE ${best_score}`
-		
+	ctx.drawImage(road, 0, canvas.height-road.height)
+	score_text.innerHTML = `SCORE: ${score}`
+	best_score_text.innerHTML = `Best Score ${best_score}`
+	}
+}
 
-
-
-document.addEventListener("keydown",
+document.addEventListener("keydown", 
 	function(event){
-		if(event.code=="Space"){
+		if(event.code=='Space'){
 			moveUp()
 		}
 	})
 
-function moveUp() {
+function moveUp(){
 	velY -=4
 	fly.play()
 }
@@ -98,9 +97,9 @@ function reload() {
 	if(score>best_score){
 		best_score = score
 	}
-	xPos = 10
+	xPos =10
 	yPos = 150
-	velY= 0
+	velY = 0
 	pipe = []
 	pipe[0] = {
 		x: canvas.width,
